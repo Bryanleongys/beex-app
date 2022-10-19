@@ -7,6 +7,7 @@ const StyledButton = styled.button`
   padding: 10px 60px;
   margin: 10px;
   cursor: pointer;
+  align-self: center;
 `;
 
 const Button = ({ setSelectedColor, selectedColor }) => {

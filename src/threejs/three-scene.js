@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-const ThreeScene = ({ selectedColor }) => {
+const ThreeScene = ({ selectedColor, shoot, setShoot }) => {
   const mountRef = useRef(null);
 
   useEffect(() => {
@@ -31,18 +31,24 @@ const ThreeScene = ({ selectedColor }) => {
     camera.position.z = 5;
     controls.update();
 
-    // if (shoot) {
-    //   var bullet = new THREE.Mesh(
-    //     new THREE.SphereGeometry(0.5, 8, 8),
-    //     new THREE.MeshBasicMaterial({ color: 0xffffff })
-    //   );
-    //   bullet.alive = true;
-    //   setTimeout(function () {
-    //     bullet.alive = false;
-    //     scene.remove(bullet);
-    //   }, 1000);
-    //   scene.add(bullet);
-    // }
+    if (shoot) {
+      var bullet = new THREE.Mesh(
+        new THREE.SphereGeometry(0.5, 8, 8),
+        new THREE.MeshBasicMaterial({ color: 0xffffff })
+      );
+      // bullet.velocity = THREE.Vector3(
+      //   Math.sin(camera.rotation.y),
+      //   0,
+      //   Math.cos(camera.rotation.y)
+      // );
+      bullet.alive = true;
+      setTimeout(function () {
+        bullet.alive = false;
+        scene.remove(bullet);
+        setShoot(false);
+      }, 1000);
+      scene.add(bullet);
+    }
 
     var animate = function () {
       requestAnimationFrame(animate);
@@ -63,7 +69,7 @@ const ThreeScene = ({ selectedColor }) => {
     controls.update();
 
     return () => mountRef.current.removeChild(renderer.domElement);
-  }, [selectedColor]);
+  }, [selectedColor, shoot]);
 
   return <div ref={mountRef} />;
 };

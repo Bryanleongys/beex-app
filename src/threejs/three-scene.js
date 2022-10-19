@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-const ThreeScene = ({ selectedColor, shoot }) => {
+const ThreeScene = ({ selectedColor }) => {
   const mountRef = useRef(null);
 
   useEffect(() => {
@@ -63,8 +63,8 @@ const ThreeScene = ({ selectedColor, shoot }) => {
     controls.update();
 
     return () => mountRef.current.removeChild(renderer.domElement);
-  }, [selectedColor, shoot]);
+  }, [selectedColor]);
 
-  return <div ref={mountRef}></div>;
+  return <div ref={mountRef} />;
 };
 export default ThreeScene;

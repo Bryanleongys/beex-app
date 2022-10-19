@@ -1,3 +1,14 @@
+import styled from "styled-components";
+
+const StyledButton = styled.button`
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  padding: 10px 60px;
+  margin: 10px;
+  cursor: pointer;
+`;
+
 const Button = ({ setSelectedColor, selectedColor }) => {
   const handleClick = () => {
     const colorArray = [
@@ -16,7 +27,7 @@ const Button = ({ setSelectedColor, selectedColor }) => {
 
   return (
     <div>
-      <button onClick={handleClick}>Change Color</button>
+      <StyledButton onClick={handleClick}>Change Color</StyledButton>
     </div>
   );
 };
